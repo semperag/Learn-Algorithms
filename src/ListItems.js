@@ -1,4 +1,4 @@
-const ListItems = () => {
+const ListItems = ({items}) => {
     <div></div>
 }
 
