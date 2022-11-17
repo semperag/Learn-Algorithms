@@ -1,4 +1,10 @@
 .navbar {
     height: 100px;
     background-color: blue;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar a {
+    color: white;
 }
