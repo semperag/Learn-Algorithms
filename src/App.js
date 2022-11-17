@@ -6,7 +6,7 @@ import ListItems from './ListItems'
 
 function App() {
 
-  const items = [1,5,4,3,2]
+  const items = [1,5,4,3,2];
 
   return (
     <div className="App">
