@@ -5,10 +5,11 @@ import Navbar from './Navbar';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import ListItems from './ListItems'
 import BubbleSort from './BubbleSort';
+import SelectionSort from './SelectionSort';
 
 function App() {
 
-  const items = [1,5,4,2,3];
+  const items = [5,4,2,3,1];
 
   return (
     <div className="App">
@@ -21,13 +22,16 @@ function App() {
           <Routes>
             <Route path="/bubble-sort" element={<BubbleSort items={items}/>} />
           </Routes>
+          <Routes>
+            <Route path="/selection-sort" element={<SelectionSort items={items}/>} />
+          </Routes>
       </Router>
       { //QuickSort
         //MergeSort
-        //BubbleSort
+        //BubbleSort    -- done
         //SelectionSort
         //HeapSort
-        //InsertionSort
+        //InsertionSort -- done
       }
     </div>
   );
