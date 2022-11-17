@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
 
-const sleep = ms => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
-
 const ListItems = ({items}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(0);
@@ -25,7 +21,7 @@ const ListItems = ({items}) => {
     useEffect(() => {
         const handleChange = async () => {
             setTimeout(() => {
-                if (end) {
+                if (end || index < 1) {
                     setIndex(length+1);
                     setLength(length+1);
                     setEnd(false);
@@ -33,7 +29,7 @@ const ListItems = ({items}) => {
                 else {
                     setIndex(index-1);
                 }
-            }, 1000);
+            }, 500);
         };
 
         if (clicked && length <= items.length) {
@@ -48,7 +44,7 @@ const ListItems = ({items}) => {
     // wait 5 s before cause a re-render
     if (clicked && length <= items.length) {
         setTimeout(() => {
-        }, 1000);
+        }, 500);
     }
     else {
         setClicked(false);
@@ -81,7 +77,7 @@ const ListItems = ({items}) => {
 
             setTimeout(() => {
                 setList(Object.assign([], rows));
-              }, 1000);
+              }, 700);
         
         console.log("length: "+length);
         console.log("end === " +end)
@@ -106,6 +102,9 @@ const ListItems = ({items}) => {
                     if (end) {
                         color = 'green';
                     }
+                }
+                else if (end && currIndex === 0 && length > 0 && i === currIndex+1) {
+                    color = 'green';
                 }
 
                 return (<div key={item} className="item" style={{height: `${50*item}px`, backgroundColor: `${color}`}}>
