@@ -7,6 +7,7 @@ const Navbar = () => {
         <div className='navbar'>
             <Link to="/">Insertion Sort</Link>
             <Link to="/bubble-sort">Bubble Sort</Link>
+            <Link to="/selection-sort">Selection Sort</Link>
         </div>
     );
 }
