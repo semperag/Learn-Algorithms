@@ -1,0 +1,13 @@
+.list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.item {
+    height: 200px;
+    background-color: pink;
+    border: 1px solid black;
+    width: 70px;
+}
