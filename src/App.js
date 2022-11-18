@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import './App.css';
 import Navbar from './Navbar';
@@ -10,6 +10,7 @@ import SelectionSort from './SelectionSort';
 function App() {
 
   const [items, setItems] = useState([5,4,2,3,1]);
+  let list = Object.assign([], items);
 
   return (
     <div className="App">
