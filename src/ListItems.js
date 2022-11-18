@@ -51,14 +51,6 @@ const ListItems = ({items}) => {
     }
     }, [length]);
 
-    useEffect(() => {
-
-        // wait 5 s before cause a re-render
-        if (clicked) {
-            sort();
-        }
-        }, [index]);
-
     function sort() {
         setClicked(true);
             console.log("rows[index]: " +rows[index]);
@@ -88,6 +80,10 @@ const ListItems = ({items}) => {
         //setLength(length+1);
         
     }
+
+    useEffect(() => {
+        setList(items)
+        }, [items]);
 
     return (
         <div className='list'>
