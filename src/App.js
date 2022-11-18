@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDom from 'react-dom';
 import './App.css';
 import Navbar from './Navbar';
@@ -9,13 +9,13 @@ import SelectionSort from './SelectionSort';
 
 function App() {
 
-  const items = [5,4,2,3,1];
+  const [items, setItems] = useState([5,4,2,3,1]);
 
   return (
     <div className="App">
       <div className='big'></div>
       <Router>
-        <Navbar />
+        <Navbar items={items} setItems={setItems}/>
           <Routes>
             <Route path="/" element={<ListItems items={items}/>} />
           </Routes>
@@ -29,7 +29,7 @@ function App() {
       { //QuickSort
         //MergeSort
         //BubbleSort    -- done
-        //SelectionSort
+        //SelectionSort -- done
         //HeapSort
         //InsertionSort -- done
       }
