@@ -86,6 +86,10 @@ const BubbleSort = ({items}) => {
         
     }
 
+    useEffect(() => {
+        setList(items)
+        }, [items]);
+
     return (
         <div className='list'>
             {list.map((item, i) => {
