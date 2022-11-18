@@ -56,6 +56,10 @@ const SelectionSort = ({items}) => {
         }
         }, [index]);
 
+        useEffect(() => {
+            setList(items)
+            }, [items]);
+
     function sort() {
         setClicked(true);
             console.log("rows[index]: " +rows[index]);
