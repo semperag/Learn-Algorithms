@@ -1,17 +1,18 @@
 import { Link } from 'react-router-dom';
 import './Navbar.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Navbar = ({items, setItems}) => {
     const minLength = 5;
+    let list = Object.assign([], items);
 
     const changeList = event => {
         const length = event.target.value;
         if (length >= minLength) {
-            console.log(length);
-            var newArray = items.slice();    
-            newArray.push(length);   
-            setItems({arr:newArray})
+            list.push(length);
+            setItems(list);
+            console.log(list);
+            console.log("items: " + items);
         }
     }
 
