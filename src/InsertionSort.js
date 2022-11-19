@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
-const InsertionSort = ({items}) => {
+const InsertionSort = ({items, speed}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(0);
     const [clicked, setClicked] = useState(false);
@@ -21,7 +21,7 @@ const InsertionSort = ({items}) => {
                 else {
                     setIndex(index-1);
                 }
-            }, 500);
+            }, speed);
         };
         if (clicked && length <= items.length) {
             handleChange();
@@ -33,7 +33,7 @@ const InsertionSort = ({items}) => {
     // wait 5 s before cause a re-render
     if (clicked && length <= items.length) {
         setTimeout(() => {
-        }, 500);
+        }, speed);
     }
     else {
         setClicked(false);
@@ -64,7 +64,7 @@ const InsertionSort = ({items}) => {
             }
             setTimeout(() => {
                 setList(Object.assign([], rows));
-              }, 700);
+              }, speed);
         
         console.log("length: "+length);
         console.log("end === " +end)
@@ -74,8 +74,14 @@ const InsertionSort = ({items}) => {
     }
 
     useEffect(() => {
-        setList(items)
-        }, [items]);
+        setList(Object.assign([], items));
+        setLength(0);
+        setClicked(false);
+        setCurrIndex(0);
+        setLowerIndex(currIndex-1);
+        setIndex(0);
+        setEnd(false);
+    }, [items]);
 
     return (
         <div className='list'>
@@ -93,7 +99,7 @@ const InsertionSort = ({items}) => {
                 else if (end && currIndex === 0 && length > 0 && i === currIndex+1) {
                     color = 'green';
                 }
-                return (<div key={item} className="item" style={{height: `${50*item}px`, backgroundColor: `${color}`}}>
+                return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
                     {item}
                     </div>)})}
             <button onClick={() => sort()}>sort</button>
