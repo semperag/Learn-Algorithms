@@ -54,26 +54,25 @@ const BubbleSort = ({items}) => {
 
     function sort() {
         setClicked(true);
-            console.log("rows[index]: " + rows[index]);
-            console.log("index: " + index);
 
             setCurrIndex(index);
             setUpperIndex(index+1);
             if (index >= length-1) {
                 setEnd(true);
             }
-            else if (rows[index] > rows[index+1]) {
+            else if (Number(rows[index]) > Number(rows[index+1])) {
+                console.log("rows[index]: "+rows[index]);
+                console.log("rows[index+1]: "+rows[index+1]);
                 const temp = rows[index];
                 rows[index] = rows[index+1];
                 rows[index+1] = temp;
+                console.log(rows);
             }
 
             setTimeout(() => {
                 setList(Object.assign([], rows));
-              }, 1000);
+              }, 1200);
         
-        console.log("length: "+length);
-        console.log("end === " +end)
 
         if (length < 0) {
             setClicked(false);
@@ -81,13 +80,11 @@ const BubbleSort = ({items}) => {
         else {
             setClicked(true);
         }
-        console.log("clicked === " + clicked);
-        //setLength(length+1);
-        
     }
 
     useEffect(() => {
-        setList(items)
+        setList(Object.assign([], items));
+        setLength(items.length);
         }, [items]);
 
     return (
