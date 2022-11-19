@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
 
-const BubbleSort = ({items}) => {
+const BubbleSort = ({items, speed}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
@@ -22,7 +22,7 @@ const BubbleSort = ({items}) => {
                 else {
                     setIndex(index+1);
                 }
-            }, 1000);
+            }, speed);
         };
 
         if (clicked && length > 0) {
@@ -37,7 +37,7 @@ const BubbleSort = ({items}) => {
     // wait 5 s before cause a re-render
     if (clicked && length > 0) {
         setTimeout(() => {
-        }, 1000);
+        }, speed);
     }
     else {
         setClicked(false);
@@ -71,7 +71,7 @@ const BubbleSort = ({items}) => {
 
             setTimeout(() => {
                 setList(Object.assign([], rows));
-              }, 1200);
+              }, speed);
         
 
         if (length < 0) {
@@ -85,7 +85,12 @@ const BubbleSort = ({items}) => {
     useEffect(() => {
         setList(Object.assign([], items));
         setLength(items.length);
-        }, [items]);
+        setClicked(false);
+        setCurrIndex(0);
+        setUpperIndex(currIndex);
+        setIndex(0);
+        setEnd(false);
+    }, [items]);
 
     return (
         <div className='list'>
@@ -102,7 +107,7 @@ const BubbleSort = ({items}) => {
                     color = 'green'
                 }
 
-                return (<div key={item} className="item" style={{height: `${50*item}px`, backgroundColor: `${color}`}}>
+                return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
                     {item}
                     </div>)})}
             <button onClick={() => sort()}>sort</button>
