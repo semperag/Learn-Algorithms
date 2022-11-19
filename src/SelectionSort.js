@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
 
-const SelectionSort = ({items}) => {
+const SelectionSort = ({items, speed}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
     const [currIndex, setCurrIndex] = useState(0);
-    //const [upperIndex, setUpperIndex] = useState(currIndex);
     const [index, setIndex] = useState(0);
     const [end, setEnd] = useState(false);
     const [min, setMin] = useState(items[currIndex]);
@@ -16,7 +15,7 @@ const SelectionSort = ({items}) => {
     useEffect(() => {
         const handleChange = async () => {
             setTimeout(() => {
-                console.log("end === " +end)
+                console.log("end === " + end)
                 if (end) {
                     setCurrIndex(currIndex+1);
                     setMinIndex(currIndex+1);
@@ -27,7 +26,7 @@ const SelectionSort = ({items}) => {
                 else {
                     setIndex(index+1);
                 }
-            }, 1000);
+            }, speed);
         };
 
         if (clicked && currIndex < length) {
@@ -42,7 +41,7 @@ const SelectionSort = ({items}) => {
     // wait 5 s before cause a re-render
     if (clicked && currIndex < length) {
         setTimeout(() => {
-        }, 1000);
+        }, speed);
     }
     else {
         setClicked(false);
@@ -56,9 +55,16 @@ const SelectionSort = ({items}) => {
         }
         }, [index]);
 
-        useEffect(() => {
-            setList(items);
-            }, [items]);
+    useEffect(() => {
+        setList(Object.assign([], items));
+        setLength(items.length);
+        setClicked(false);
+        setCurrIndex(0);
+        setIndex(0);
+        setEnd(false);
+        setMin(items[currIndex]);
+        setMinIndex(currIndex);
+    }, [items]);
 
     function sort() {
         setClicked(true);
@@ -105,7 +111,7 @@ const SelectionSort = ({items}) => {
                     color = 'red';
                 }
 
-                return (<div key={item} className="item" style={{height: `${50*item}px`, backgroundColor: `${color}`}}>
+                return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
                     {item}
                     </div>)})}
             <button onClick={() => sort()}>sort</button>
