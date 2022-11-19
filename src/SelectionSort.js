@@ -57,7 +57,7 @@ const SelectionSort = ({items}) => {
         }, [index]);
 
         useEffect(() => {
-            setList(items)
+            setList(items);
             }, [items]);
 
     function sort() {

@@ -33,6 +33,7 @@ const ListItems = ({items}) => {
         };
 
         if (clicked && length <= items.length) {
+            console.log("clicked");
             handleChange();
         }
     }, ([list]));
@@ -54,7 +55,7 @@ const ListItems = ({items}) => {
     function sort() {
         setClicked(true);
             console.log("rows[index]: " +rows[index]);
-            console.log("index: " +index);
+            console.log("index: " + index);
 
             setCurrIndex(index);
             setLowerIndex(index-1);
@@ -75,6 +76,7 @@ const ListItems = ({items}) => {
         console.log("end === " +end)
 
         if (length >= rows.length) {
+            console.log("bad spot");
             setClicked(false);
         }
         //setLength(length+1);
@@ -82,7 +84,7 @@ const ListItems = ({items}) => {
     }
 
     useEffect(() => {
-        setList(items)
+        setList(items);
         }, [items]);
 
     return (
