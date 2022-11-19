@@ -10,7 +10,7 @@ import SelectionSort from './SelectionSort';
 function App() {
 
   const [items, setItems] = useState([5,4,2,3,1]);
-  let list = Object.assign([], items);
+  const [speed, setSpeed] = useState(700);
 
   function shuffleArray(array) {
     let currentIndex = array.length,  randomIndex;
@@ -34,15 +34,15 @@ function App() {
     <div className="App">
       <div className='big'></div>
       <Router>
-        <Navbar items={items} setItems={setItems} shuffleArray={shuffleArray}/>
+        <Navbar items={items} setItems={setItems} setSpeed={setSpeed} shuffleArray={shuffleArray}/>
           <Routes>
-            <Route path="/" element={<InsertionSort items={items}/>} />
+            <Route path="/" element={<InsertionSort items={items} speed={speed}/>} />
           </Routes>
           <Routes>
-            <Route path="/bubble-sort" element={<BubbleSort items={items}/>} />
+            <Route path="/bubble-sort" element={<BubbleSort items={items} speed={speed}/>} />
           </Routes>
           <Routes>
-            <Route path="/selection-sort" element={<SelectionSort items={items}/>} />
+            <Route path="/selection-sort" element={<SelectionSort items={items} speed={speed}/>} />
           </Routes>
       </Router>
       { //QuickSort
