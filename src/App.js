@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import InsertionSort from './InsertionSort'
 import BubbleSort from './BubbleSort';
 import SelectionSort from './SelectionSort';
+import HeapSort from './HeapSort';
 
 function App() {
 
@@ -43,6 +44,9 @@ function App() {
           </Routes>
           <Routes>
             <Route path="/selection-sort" element={<SelectionSort items={items} speed={speed}/>} />
+          </Routes>
+          <Routes>
+            <Route path="/heap-sort" element={<HeapSort items={items} speed={speed}/>} />
           </Routes>
       </Router>
       { //QuickSort
