@@ -1,103 +1,132 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
-const HeapSort = ({items, speed}) => {
+const HeapSort = ({items, speed, setItems}) => {
     const [list, setList] = useState(Object.assign([], items));
-    const [length, setLength] = useState(0);
+    const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
-    const [currIndex, setCurrIndex] = useState(0);
-    const [lowerIndex, setLowerIndex] = useState(currIndex-1);
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(Math.floor(items.length / 2) - 1);
     const [end, setEnd] = useState(false);
+    const [firstHeap, setFirstHeap] = useState(true);
+    const [secondHeap, setSecondHeap] = useState(false);
+    const [largestNum, setLargestNum] = useState(-1);
+    const [swap, setSwap] = useState(-1);
+    const [heapLength, setHeapLength] = useState(-1);
+    const [heapIndex, setHeapIndex] = useState(-1);
     let rows = Object.assign([], list);
-
-    useEffect(() => {
-        const handleChange = async () => {
-            setTimeout(() => {
-                if (end || index < 1) {
-                    setIndex(length+1);
-                    setLength(length+1);
-                    setEnd(false);
-                }
-                else {
-                    setIndex(index-1);
-                }
-            }, speed);
-        };
-        if (clicked && length <= items.length) {
-            handleChange();
-        }
-    }, ([list]));
-    // simulate set interval behavior 
-    // each 5 s this function will be re-invoked
-    useEffect(() => {
-    // wait 5 s before cause a re-render
-    if (clicked && length <= items.length) {
-        setTimeout(() => {
-        }, speed);
-    }
-    else {
-        setClicked(false);
-    }
-    }, [length]);
 
     useEffect(() => {
 
         // wait 5 s before cause a re-render
         if (clicked) {
-            sort();
+            setTimeout(() => {
+                sort();
+            }, speed);
         }
         }, [index]);
 
-    function sort() {
-        setClicked(true);
-            console.log("rows[index]: " +rows[index]);
-            console.log("index: " +index);
-            setCurrIndex(index);
-            setLowerIndex(index-1);
-            if (index > 0 && rows[index] < rows[index-1]) {
-                const temp = rows[index];
-                rows[index] = rows[index-1];
-                rows[index-1] = temp;
-            }
-            else {
-                setEnd(true);
-            }
-            setTimeout(() => {
-                setList(Object.assign([], rows));
-              }, speed);
-        
-        console.log("length: "+length);
-        console.log("end === " +end)
-        if (length >= rows.length) {
-            setClicked(false);
+    // JavaScript program for implementation
+// of Heap Sort
+ 
+function sort()
+{
+    setClicked(true);
+    // Build heap (rearrange array)
+    if (firstHeap) {
+        if (index >= 0) {
+            setHeapLength(length);
+            setHeapIndex(index);
+            heapify(rows, length, index);
+            setIndex(index-1);
         }
+        else {
+            setFirstHeap(false);
+            setSecondHeap(true);
+            setIndex(length - 1);
+        }
+        setList(Object.assign([], rows));
     }
+    
+    if (secondHeap) {
+        if (index > 0) {
+            var temp = rows[0];
+            rows[0] = rows[index];
+            rows[index] = temp;
+            // call max heapify on the reduced heap
+            setHeapLength(index);
+            setHeapIndex(0);
+            heapify(rows, index, 0);
+            setIndex(index-1);
+        }
+        else {
+            setSecondHeap(false);
+        }
+        setList(Object.assign([], rows));
+    }
+    
+    if (!secondHeap && ! firstHeap) {
+        setLargestNum(-1);
+        setSwap(-1);
+        setClicked(false);
+        setEnd(true);
+        setItems(Object.assign([], list));
+    }
+}
+
+// To heapify a subtree rooted with node i which is
+// an index in arr[]. n is size of heap
+function heapify(rows, heapLength, i)
+{
+    var largest = i; // Initialize largest as root
+    var l = 2 * i + 1; // left = 2*i + 1
+    var r = 2 * i + 2; // right = 2*i + 2
+    setLargestNum(largest);
+
+    // If left child is larger than root
+    if (l < heapLength && rows[l] > rows[largest])
+        largest = l;
+
+    // If right child is larger than largest so far
+    if (r < heapLength && rows[r] > rows[largest]) 
+        largest = r;
+
+    setLargestNum(largest);
+
+    if (largest != i) {
+        let swap = rows[i];
+        rows[i] = rows[largest];
+        rows[largest] = swap;
+        setSwap(i);
+        setHeapIndex(largest);
+
+        heapify(rows, heapLength, largest);
+    }
+}
+
+// This code is contributed by SoumikMondal
 
     useEffect(() => {
         setList(Object.assign([], items));
-        setLength(0);
+        setLength(items.length);
         setClicked(false);
-        setCurrIndex(0);
-        setLowerIndex(currIndex-1);
-        setIndex(0);
+        setIndex(Math.floor(items.length / 2) - 1);
         setEnd(false);
+        setFirstHeap(true);
+        setSecondHeap(false);
+        setLargestNum(-1);
+        setSwap(-1);
+        setHeapLength(-1);
+        setHeapIndex(-1);
     }, [items]);
 
     return (
         <div className='list'>
             {list.map((item, i) => {
                 let color = 'pink';
-                if (length >= items.length) {
+                if (!firstHeap && !secondHeap) {
                     color = 'green';
                 }
-                else if (i === currIndex || i === lowerIndex) {
+                else if (i === index || i === largestNum || i === swap) {
                     color = 'red';
-                    if (end) {
-                        color = 'green';
-                    }
-                }
-                else if (end && currIndex === 0 && length > 0 && i === currIndex+1) {
-                    color = 'green';
                 }
                 return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
                     {item}
