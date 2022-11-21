@@ -12,6 +12,7 @@ const HeapSort = ({items, speed, setItems}) => {
     const [swap, setSwap] = useState(-1);
     const [heapLength, setHeapLength] = useState(-1);
     const [heapIndex, setHeapIndex] = useState(-1);
+    const [sorted, setSorted] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -20,7 +21,7 @@ const HeapSort = ({items, speed, setItems}) => {
         if (clicked) {
             setTimeout(() => {
                 sort();
-            }, speed);
+            }, speed*3);
         }
         }, [index]);
 
@@ -30,6 +31,7 @@ const HeapSort = ({items, speed, setItems}) => {
 function sort()
 {
     setClicked(true);
+    setSorted(false);
     // Build heap (rearrange array)
     if (firstHeap) {
         if (index >= 0) {
@@ -64,10 +66,8 @@ function sort()
     }
     
     if (!secondHeap && ! firstHeap) {
-        setLargestNum(-1);
-        setSwap(-1);
         setClicked(false);
-        setEnd(true);
+        setSorted(true);
         setItems(Object.assign([], list));
     }
 }
