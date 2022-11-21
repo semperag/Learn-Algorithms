@@ -60,15 +60,16 @@ function sort()
             setIndex(index-1);
         }
         else {
+            setItems(Object.assign([], rows));
             setSecondHeap(false);
+            setSorted(true);
         }
         setList(Object.assign([], rows));
     }
     
-    if (!secondHeap && ! firstHeap) {
-        setClicked(false);
-        setSorted(true);
+    if (!secondHeap && !firstHeap) {
         setItems(Object.assign([], list));
+        setSorted(true);
     }
 }
 
@@ -105,6 +106,8 @@ function heapify(rows, heapLength, i)
 // This code is contributed by SoumikMondal
 
     useEffect(() => {
+        if (!clicked)
+            setSorted(false);
         setList(Object.assign([], items));
         setLength(items.length);
         setClicked(false);
@@ -122,7 +125,7 @@ function heapify(rows, heapLength, i)
         <div className='list'>
             {list.map((item, i) => {
                 let color = 'pink';
-                if (!firstHeap && !secondHeap) {
+                if (sorted) {
                     color = 'green';
                 }
                 else if (i === index || i === largestNum || i === swap) {
