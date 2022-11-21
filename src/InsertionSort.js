@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
-const InsertionSort = ({items, speed}) => {
+const InsertionSort = ({items, speed, setItems}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(0);
     const [clicked, setClicked] = useState(false);
@@ -8,6 +8,7 @@ const InsertionSort = ({items, speed}) => {
     const [lowerIndex, setLowerIndex] = useState(currIndex-1);
     const [index, setIndex] = useState(0);
     const [end, setEnd] = useState(false);
+    const [sorted, setSorted] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -30,14 +31,15 @@ const InsertionSort = ({items, speed}) => {
     // simulate set interval behavior 
     // each 5 s this function will be re-invoked
     useEffect(() => {
-    // wait 5 s before cause a re-render
-    if (clicked && length <= items.length) {
-        setTimeout(() => {
-        }, speed);
-    }
-    else {
-        setClicked(false);
-    }
+        // wait 5 s before cause a re-render
+        if (clicked && length <= items.length) {
+            setTimeout(() => {
+            }, speed);
+        }
+        else {
+            setClicked(false);
+            setItems(Object.assign([], list));
+        }
     }, [length]);
 
     useEffect(() => {
@@ -49,6 +51,7 @@ const InsertionSort = ({items, speed}) => {
         }, [index]);
 
     function sort() {
+        setSorted(false);
         setClicked(true);
             console.log("rows[index]: " +rows[index]);
             console.log("index: " +index);
@@ -70,6 +73,8 @@ const InsertionSort = ({items, speed}) => {
         console.log("end === " +end)
         if (length >= rows.length) {
             setClicked(false);
+            setSorted(true);
+            setItems(Object.assign([], list));
         }
     }
 
@@ -87,7 +92,7 @@ const InsertionSort = ({items, speed}) => {
         <div className='list'>
             {list.map((item, i) => {
                 let color = 'pink';
-                if (length >= items.length) {
+                if (sorted === true) {
                     color = 'green';
                 }
                 else if (i === currIndex || i === lowerIndex) {
