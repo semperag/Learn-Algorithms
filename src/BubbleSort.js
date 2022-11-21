@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
 
-const BubbleSort = ({items, speed}) => {
+const BubbleSort = ({items, speed, setItems}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
@@ -9,6 +9,7 @@ const BubbleSort = ({items, speed}) => {
     const [upperIndex, setUpperIndex] = useState(currIndex);
     const [index, setIndex] = useState(0);
     const [end, setEnd] = useState(false);
+    const [sorted, setSorted] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -41,6 +42,7 @@ const BubbleSort = ({items, speed}) => {
     }
     else {
         setClicked(false);
+        setItems(Object.assign([], list));
     }
     }, [length]);
 
@@ -54,6 +56,7 @@ const BubbleSort = ({items, speed}) => {
 
     function sort() {
         setClicked(true);
+        setSorted(false);
 
             setCurrIndex(index);
             setUpperIndex(index+1);
@@ -74,11 +77,11 @@ const BubbleSort = ({items, speed}) => {
               }, speed);
         
 
-        if (length < 0) {
+        if (length <= 1) {
+            console.log('here');
             setClicked(false);
-        }
-        else {
-            setClicked(true);
+            setSorted(true);
+            setItems(Object.assign([], list));
         }
     }
 
@@ -97,7 +100,7 @@ const BubbleSort = ({items, speed}) => {
             {list.map((item, i) => {
                 let color = 'pink';
 
-                if (length <= 0) {
+                if (sorted) {
                     color = 'green';
                 }
                 else if (!end && (i === currIndex || i === upperIndex)) {
