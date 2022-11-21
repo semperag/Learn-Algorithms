@@ -7,6 +7,7 @@ import InsertionSort from './InsertionSort'
 import BubbleSort from './BubbleSort';
 import SelectionSort from './SelectionSort';
 import HeapSort from './HeapSort';
+import QuickSort from './QuickSort';
 
 function App() {
 
@@ -48,12 +49,15 @@ function App() {
           <Routes>
             <Route path="/heap-sort" element={<HeapSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
+          <Routes>
+            <Route path="/quick-sort" element={<QuickSort items={items} speed={speed} setItems={setItems}/>} />
+          </Routes>
       </Router>
       { //QuickSort
         //MergeSort
         //BubbleSort    -- done
         //SelectionSort -- done
-        //HeapSort
+        //HeapSort      -- done
         //InsertionSort -- done
       }
     </div>
