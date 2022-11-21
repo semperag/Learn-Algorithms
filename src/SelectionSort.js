@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
 
-const SelectionSort = ({items, speed}) => {
+const SelectionSort = ({items, speed, setItems}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
@@ -10,6 +10,7 @@ const SelectionSort = ({items, speed}) => {
     const [end, setEnd] = useState(false);
     const [min, setMin] = useState(items[currIndex]);
     const [minIndex, setMinIndex] = useState(currIndex);
+    const [sorted, setSorted] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -45,6 +46,7 @@ const SelectionSort = ({items, speed}) => {
     }
     else {
         setClicked(false);
+        setItems(Object.assign([], list));
     }
     }, [length]);
 
@@ -62,12 +64,13 @@ const SelectionSort = ({items, speed}) => {
         setCurrIndex(0);
         setIndex(0);
         setEnd(false);
-        setMin(items[currIndex]);
-        setMinIndex(currIndex);
+        setMin(items[0]);
+        setMinIndex(0);
     }, [items]);
 
     function sort() {
         setClicked(true);
+        setSorted(false);
             console.log("rows[index]: " +rows[index]);
             console.log("index: " +index);
 
@@ -87,6 +90,8 @@ const SelectionSort = ({items, speed}) => {
 
         if (currIndex >= length) {
             setClicked(false);
+            setSorted(true);
+            setItems(Object.assign([], list));
         }
     }
 
@@ -95,7 +100,7 @@ const SelectionSort = ({items, speed}) => {
             {list.map((item, i) => {
                 let color = 'pink';
 
-                if (currIndex >= length) {
+                if (sorted) {
                     color = 'green';
                 }
                 else if (!end && i === minIndex) {
