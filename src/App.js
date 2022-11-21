@@ -46,7 +46,7 @@ function App() {
             <Route path="/selection-sort" element={<SelectionSort items={items} speed={speed}/>} />
           </Routes>
           <Routes>
-            <Route path="/heap-sort" element={<HeapSort items={items} speed={speed}/>} />
+            <Route path="/heap-sort" element={<HeapSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
       </Router>
       { //QuickSort
