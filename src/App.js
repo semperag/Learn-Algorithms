@@ -37,13 +37,13 @@ function App() {
       <Router>
         <Navbar items={items} setItems={setItems} setSpeed={setSpeed} shuffleArray={shuffleArray}/>
           <Routes>
-            <Route path="/" element={<InsertionSort items={items} speed={speed}/>} />
+            <Route path="/" element={<InsertionSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
           <Routes>
-            <Route path="/bubble-sort" element={<BubbleSort items={items} speed={speed}/>} />
+            <Route path="/bubble-sort" element={<BubbleSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
           <Routes>
-            <Route path="/selection-sort" element={<SelectionSort items={items} speed={speed}/>} />
+            <Route path="/selection-sort" element={<SelectionSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
           <Routes>
             <Route path="/heap-sort" element={<HeapSort items={items} speed={speed} setItems={setItems}/>} />
