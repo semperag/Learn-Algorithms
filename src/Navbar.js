@@ -44,7 +44,7 @@ const Navbar = ({items, setItems, setSpeed, shuffleArray}) => {
             <Link to="/bubble-sort">Bubble Sort</Link>
             <Link to="/selection-sort">Selection Sort</Link>
             <Link to="/heap-sort">Heap Sort</Link>
-            <Link to="/heap-sort">Quick Sort</Link>
+            <Link to="/quick-sort">Quick Sort</Link>
             <input onChange={changeSpeed}></input>
         </div>
     );
