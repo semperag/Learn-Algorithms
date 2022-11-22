@@ -52,6 +52,9 @@ function App() {
           <Routes>
             <Route path="/quick-sort" element={<QuickSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
+          <Routes>
+            <Route path="/merge-sort" element={<MergeSort items={items} speed={speed} setItems={setItems}/>} />
+          </Routes>
       </Router>
       { //QuickSort
         //MergeSort
