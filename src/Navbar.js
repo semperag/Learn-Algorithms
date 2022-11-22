@@ -45,6 +45,7 @@ const Navbar = ({items, setItems, setSpeed, shuffleArray}) => {
             <Link to="/selection-sort">Selection Sort</Link>
             <Link to="/heap-sort">Heap Sort</Link>
             <Link to="/quick-sort">Quick Sort</Link>
+            <Link to="/merge-sort">Merge Sort</Link>
             <input onChange={changeSpeed}></input>
         </div>
     );
