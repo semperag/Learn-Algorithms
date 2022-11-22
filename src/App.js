@@ -8,6 +8,7 @@ import BubbleSort from './BubbleSort';
 import SelectionSort from './SelectionSort';
 import HeapSort from './HeapSort';
 import QuickSort from './QuickSort';
+import MergeSort from './MergeSort';
 
 function App() {
 
