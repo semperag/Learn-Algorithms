@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ListItems.css';///////
+import './ListItems.css';//////
 
 const MergeSort = ({items, speed, setItems}) => {
     const [list, setList] = useState(Object.assign([], items));
