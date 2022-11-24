@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 import React, { useState, useEffect } from 'react';
-///////////
+//////////
 const minLength = 5;
 const minSpeed = 50;
 
