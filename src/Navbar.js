@@ -4,7 +4,7 @@ import './Navbar.css';
 import React, { useState, useEffect } from 'react';
 const minLength = 5;
 const minSpeed = 50;
-///////s
+///////
 const Navbar = ({items, setItems, setSpeed, shuffleArray}) => {
     let list = Object.assign([], items);
 
