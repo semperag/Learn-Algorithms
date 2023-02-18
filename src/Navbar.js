@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 const minLength = 5;
 const minSpeed = 50;
 
-const Navbar = ({items, setItems, setSpeed, shuffleArray}) => {
+const Navbar = ({items, setItems, speed, setSpeed, setSorting, shuffleArray}) => {
     let list = Object.assign([], items);
 
     const changeList = event => {
@@ -36,16 +36,26 @@ const Navbar = ({items, setItems, setSpeed, shuffleArray}) => {
         }
     }
 
+    function sort() {
+        setSorting(true);
+    }
+
+    const arrayLength = items.length;
+
     return (
         <div className='navbar'>
-            <input onChange={changeList}></input>
+            <input onChange={changeList} value={arrayLength} type="range" min="5" max="70"></input>
             <Link to="/">Insertion Sort</Link>
             <Link to="/bubble-sort">Bubble Sort</Link>
             <Link to="/selection-sort">Selection Sort</Link>
             <Link to="/heap-sort">Heap Sort</Link>
+            {/*
+            Comming Soon!
             <Link to="/quick-sort">Quick Sort</Link>
             <Link to="/merge-sort">Merge Sort</Link>
-            <input onChange={changeSpeed}></input>
+            */}
+            <input onChange={changeSpeed} type="range" min="0" max="1000"></input>
+            <button className="sort" value={speed} onClick={sort}>Sort</button>
         </div>
     );
 }

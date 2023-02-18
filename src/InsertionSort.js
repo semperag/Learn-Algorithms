@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
-const InsertionSort = ({items, speed, setItems}) => {
+const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(0);
     const [clicked, setClicked] = useState(false);
@@ -9,6 +9,7 @@ const InsertionSort = ({items, speed, setItems}) => {
     const [index, setIndex] = useState(0);
     const [end, setEnd] = useState(false);
     const [sorted, setSorted] = useState(false);
+    const [sortClicked, setSortClicked] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -86,7 +87,18 @@ const InsertionSort = ({items, speed, setItems}) => {
         setLowerIndex(currIndex-1);
         setIndex(0);
         setEnd(false);
+        setSortClicked(false)
     }, [items]);
+
+    if (sortClicked === false) {
+        console.log("inside sort click");
+        if (sorting === true) {
+            setSortClicked(true);
+            console.log("shpuld be sorting!");
+            sort();
+            setSorting(false);
+        }
+    }
 
     return (
         <div className='list'>

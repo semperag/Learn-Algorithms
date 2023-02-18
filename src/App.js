@@ -13,7 +13,11 @@ import MergeSort from './MergeSort';
 function App() {
 
   const [items, setItems] = useState([5,4,2,3,1]);
-  const [speed, setSpeed] = useState(700);
+  const [speed, setSpeed] = useState(50);
+  const [sorting, setSorting] = useState(false);
+
+  console.log(sorting);
+  useEffect(() => {}, [sorting]);
 
   function shuffleArray(array) {
     let currentIndex = array.length,  randomIndex;
@@ -37,9 +41,9 @@ function App() {
     <div className="App">
       <div className='big'></div>
       <Router>
-        <Navbar items={items} setItems={setItems} setSpeed={setSpeed} shuffleArray={shuffleArray}/>
+        <Navbar items={items} setItems={setItems} speed={speed} setSpeed={setSpeed} setSorting={setSorting} shuffleArray={shuffleArray}/>
           <Routes>
-            <Route path="/" element={<InsertionSort items={items} speed={speed} setItems={setItems}/>} />
+            <Route path="/" element={<InsertionSort items={items} speed={speed} setItems={setItems} sorting={sorting} setSorting={setSorting}/>} />
           </Routes>
           <Routes>
             <Route path="/bubble-sort" element={<BubbleSort items={items} speed={speed} setItems={setItems}/>} />
@@ -50,6 +54,8 @@ function App() {
           <Routes>
             <Route path="/heap-sort" element={<HeapSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
+          {// VVV Coming Soon! 
+          }
           <Routes>
             <Route path="/quick-sort" element={<QuickSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
