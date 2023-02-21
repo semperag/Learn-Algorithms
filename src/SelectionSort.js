@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
 
-const SelectionSort = ({items, speed, setItems}) => {
+const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
@@ -11,6 +11,7 @@ const SelectionSort = ({items, speed, setItems}) => {
     const [min, setMin] = useState(items[currIndex]);
     const [minIndex, setMinIndex] = useState(currIndex);
     const [sorted, setSorted] = useState(false);
+    const [sortClicked, setSortClicked] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -66,6 +67,7 @@ const SelectionSort = ({items, speed, setItems}) => {
         setEnd(false);
         setMin(items[0]);
         setMinIndex(0);
+        setSortClicked(false);
     }, [items]);
 
     function sort() {
@@ -95,6 +97,16 @@ const SelectionSort = ({items, speed, setItems}) => {
         }
     }
 
+    if (sortClicked === false) {
+        console.log("inside sort click");
+        if (sorting === true) {
+            setSortClicked(true);
+            console.log("shpuld be sorting!");
+            sort();
+            setSorting(false);
+        }
+    }
+
     return (
         <div className='list'>
             {list.map((item, i) => {
@@ -116,10 +128,15 @@ const SelectionSort = ({items, speed, setItems}) => {
                     color = 'red';
                 }
 
-                return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
-                    {item}
-                    </div>)})}
-            <button onClick={() => sort()}>sort</button>
+                if (length <= 10) {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
+                        {item}
+                        </div>)
+                }
+                else {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}></div>)
+                }
+            })}
         </div>
     )
 }

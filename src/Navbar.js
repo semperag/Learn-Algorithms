@@ -10,30 +10,13 @@ const Navbar = ({items, setItems, speed, setSpeed, setSorting, shuffleArray}) =>
 
     const changeList = event => {
         const length = event.target.value;
-        let changingLength = Number(items.length);
-        if (length > minLength) {
-            if (Number(length) > Number(changingLength)) {
-                while ( Number(length) > Number(changingLength)) {
-                    list.push(changingLength+1);
-                    changingLength = changingLength + 1;
-                    console.log('here')
-                }
-                setItems(shuffleArray(list));
-                console.log('here')
-            }
-            else if (Number(length) < Number(changingLength)) {
-                const list = Array.from({length: length}, (_, i) => i + 1);
-                setItems(shuffleArray(list));
-            }
-        }
+        const list = Array.from({length: length}, (_, i) => i + 1);
+        setItems(shuffleArray(list));
     }
 
     const changeSpeed = event => {
         const speed = event.target.value;
-
-        if (speed >= 0 && speed <= 1500) {
-            setSpeed(speed);
-        }
+        setSpeed(speed);
     }
 
     function sort() {
@@ -44,11 +27,11 @@ const Navbar = ({items, setItems, speed, setSpeed, setSorting, shuffleArray}) =>
 
     return (
         <div className='navbar'>
-            <input onChange={changeList} value={arrayLength} type="range" min="5" max="70"></input>
-            <Link to="/">Insertion Sort</Link>
-            <Link to="/bubble-sort">Bubble Sort</Link>
-            <Link to="/selection-sort">Selection Sort</Link>
-            <Link to="/heap-sort">Heap Sort</Link>
+            <input onChange={changeList} value={arrayLength} type="range" step="5" min="5" max="100"></input>
+            <Link to="/Learn-Algorithms/insertion-sort">Insertion Sort</Link>
+            <Link to="/Learn-Algorithms/bubble-sort">Bubble Sort</Link>
+            <Link to="/Learn-Algorithms/selection-sort">Selection Sort</Link>
+            <Link to="/Learn-Algorithms/heap-sort">Heap Sort</Link>
             {/*
             Comming Soon!
             <Link to="/quick-sort">Quick Sort</Link>

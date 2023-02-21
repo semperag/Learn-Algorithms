@@ -1,9 +1,10 @@
 .App {
     background-color: black;
     height: 100vh;
+    min-width: 800px;
 }
 
 .list {
-    width: 50% !important;
+    width: 75% !important;
     margin: auto;
 }

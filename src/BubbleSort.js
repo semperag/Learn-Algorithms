@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
 
-const BubbleSort = ({items, speed, setItems}) => {
+const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
@@ -10,6 +10,7 @@ const BubbleSort = ({items, speed, setItems}) => {
     const [index, setIndex] = useState(0);
     const [end, setEnd] = useState(false);
     const [sorted, setSorted] = useState(false);
+    const [sortClicked, setSortClicked] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -93,7 +94,18 @@ const BubbleSort = ({items, speed, setItems}) => {
         setUpperIndex(currIndex);
         setIndex(0);
         setEnd(false);
+        setSortClicked(false);
     }, [items]);
+
+    if (sortClicked === false) {
+        console.log("inside sort click");
+        if (sorting === true) {
+            setSortClicked(true);
+            console.log("shpuld be sorting!");
+            sort();
+            setSorting(false);
+        }
+    }
 
     return (
         <div className='list'>
@@ -110,10 +122,15 @@ const BubbleSort = ({items, speed, setItems}) => {
                     color = 'green'
                 }
 
-                return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
-                    {item}
-                    </div>)})}
-            <button onClick={() => sort()}>sort</button>
+                if (items.length <= 10) {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
+                        {item}
+                        </div>)
+                }
+                else {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}></div>)
+                }
+            })}
         </div>
     )
 }

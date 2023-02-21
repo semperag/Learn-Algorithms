@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
-const HeapSort = ({items, speed, setItems}) => {
+const HeapSort = ({items, speed, setItems, sorting, setSorting}) => {
     const [list, setList] = useState(Object.assign([], items));
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
@@ -13,6 +13,7 @@ const HeapSort = ({items, speed, setItems}) => {
     const [heapLength, setHeapLength] = useState(-1);
     const [heapIndex, setHeapIndex] = useState(-1);
     const [sorted, setSorted] = useState(false);
+    const [sortClicked, setSortClicked] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
@@ -103,8 +104,6 @@ function heapify(rows, heapLength, i)
     }
 }
 
-// This code is contributed by SoumikMondal
-
     useEffect(() => {
         if (!clicked)
             setSorted(false);
@@ -119,7 +118,18 @@ function heapify(rows, heapLength, i)
         setSwap(-1);
         setHeapLength(-1);
         setHeapIndex(-1);
+        setSortClicked(false);
     }, [items]);
+
+    if (sortClicked === false) {
+        console.log("inside sort click");
+        if (sorting === true) {
+            setSortClicked(true);
+            console.log("shpuld be sorting!");
+            sort();
+            setSorting(false);
+        }
+    }
 
     return (
         <div className='list'>
@@ -131,10 +141,16 @@ function heapify(rows, heapLength, i)
                 else if (i === index || i === largestNum || i === swap) {
                     color = 'red';
                 }
-                return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
-                    {item}
-                    </div>)})}
-            <button onClick={() => sort()}>sort</button>
+
+                if (length <= 10) {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
+                        {item}
+                        </div>)
+                }
+                else {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}></div>)
+                }
+            })}
         </div>
     )
 }

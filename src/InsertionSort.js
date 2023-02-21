@@ -87,7 +87,7 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
         setLowerIndex(currIndex-1);
         setIndex(0);
         setEnd(false);
-        setSortClicked(false)
+        setSortClicked(false);
     }, [items]);
 
     if (sortClicked === false) {
@@ -103,7 +103,7 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
     return (
         <div className='list'>
             {list.map((item, i) => {
-                let color = 'pink';
+                let color = 'lightpink';
                 if (sorted === true) {
                     color = 'green';
                 }
@@ -116,10 +116,16 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
                 else if (end && currIndex === 0 && length > 0 && i === currIndex+1) {
                     color = 'green';
                 }
-                return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}>
-                    {item}
-                    </div>)})}
-            <button onClick={() => sort()}>sort</button>
+                
+                if (items.length <= 10) {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
+                        {item}
+                        </div>)
+                }
+                else {
+                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}></div>)
+                }
+            })}
         </div>
     )
 }

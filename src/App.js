@@ -43,24 +43,21 @@ function App() {
       <Router>
         <Navbar items={items} setItems={setItems} speed={speed} setSpeed={setSpeed} setSorting={setSorting} shuffleArray={shuffleArray}/>
           <Routes>
-            <Route path="/" element={<InsertionSort items={items} speed={speed} setItems={setItems} sorting={sorting} setSorting={setSorting}/>} />
-          </Routes>
-          <Routes>
-            <Route path="/bubble-sort" element={<BubbleSort items={items} speed={speed} setItems={setItems}/>} />
-          </Routes>
-          <Routes>
-            <Route path="/selection-sort" element={<SelectionSort items={items} speed={speed} setItems={setItems}/>} />
-          </Routes>
-          <Routes>
-            <Route path="/heap-sort" element={<HeapSort items={items} speed={speed} setItems={setItems}/>} />
+            <Route path="/Learn-Algorithms/bubble-sort" element={<BubbleSort items={items} speed={speed} setItems={setItems} sorting={sorting} setSorting={setSorting}/>} />
+          
+            <Route path="/Learn-Algorithms/selection-sort" element={<SelectionSort items={items} speed={speed} setItems={setItems} sorting={sorting} setSorting={setSorting}/>} />
+          
+            <Route path="/Learn-Algorithms/heap-sort" element={<HeapSort items={items} speed={speed} setItems={setItems} sorting={sorting} setSorting={setSorting}/>} />
+          
+            <Route path="/Learn-Algorithms/*" element={<InsertionSort items={items} speed={speed} setItems={setItems} sorting={sorting} setSorting={setSorting}/>} />
           </Routes>
           {// VVV Coming Soon! 
           }
           <Routes>
-            <Route path="/quick-sort" element={<QuickSort items={items} speed={speed} setItems={setItems}/>} />
+            <Route path="/Learn-Algorithms/quick-sort" element={<QuickSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
           <Routes>
-            <Route path="/merge-sort" element={<MergeSort items={items} speed={speed} setItems={setItems}/>} />
+            <Route path="/Learn-Algorithms/merge-sort" element={<MergeSort items={items} speed={speed} setItems={setItems}/>} />
           </Routes>
       </Router>
       { //QuickSort
