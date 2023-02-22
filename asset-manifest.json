@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Learn-Algorithms/static/css/main.97fd0614.css",
-    "main.js": "/Learn-Algorithms/static/js/main.0e551644.js",
+    "main.css": "/Learn-Algorithms/static/css/main.d6d7a8b2.css",
+    "main.js": "/Learn-Algorithms/static/js/main.9e5282a2.js",
     "static/js/787.2d276649.chunk.js": "/Learn-Algorithms/static/js/787.2d276649.chunk.js",
     "index.html": "/Learn-Algorithms/index.html",
-    "main.97fd0614.css.map": "/Learn-Algorithms/static/css/main.97fd0614.css.map",
-    "main.0e551644.js.map": "/Learn-Algorithms/static/js/main.0e551644.js.map",
+    "main.d6d7a8b2.css.map": "/Learn-Algorithms/static/css/main.d6d7a8b2.css.map",
+    "main.9e5282a2.js.map": "/Learn-Algorithms/static/js/main.9e5282a2.js.map",
     "787.2d276649.chunk.js.map": "/Learn-Algorithms/static/js/787.2d276649.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.97fd0614.css",
-    "static/js/main.0e551644.js"
+    "static/css/main.d6d7a8b2.css",
+    "static/js/main.9e5282a2.js"
   ]
 }
