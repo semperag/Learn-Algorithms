@@ -39,7 +39,15 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
         }
         else {
             setClicked(false);
-            setItems(Object.assign([], list));
+            setSorted(true);
+            setLength(0);
+            setClicked(false);
+            setCurrIndex(0);
+            setLowerIndex(currIndex-1);
+            setIndex(0);
+            setEnd(false);
+            setSortClicked(false);
+            setSorting(false);
         }
     }, [length]);
 
@@ -75,7 +83,14 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
         if (length >= rows.length) {
             setClicked(false);
             setSorted(true);
-            setItems(Object.assign([], list));
+            setLength(0);
+            setClicked(false);
+            setCurrIndex(0);
+            setLowerIndex(currIndex-1);
+            setIndex(0);
+            setEnd(false);
+            setSortClicked(false);
+            setSorting(false);
         }
     }
 
@@ -88,6 +103,8 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
         setIndex(0);
         setEnd(false);
         setSortClicked(false);
+        setSorting(false);
+        setSorted(false);
     }, [items]);
 
     if (sortClicked === false) {
@@ -96,25 +113,24 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
             setSortClicked(true);
             console.log("shpuld be sorting!");
             sort();
-            setSorting(false);
         }
     }
 
     return (
         <div className='list'>
             {list.map((item, i) => {
-                let color = 'lightpink';
+                let color = 'white';
                 if (sorted === true) {
-                    color = 'green';
+                    color = 'lightgreen';
                 }
                 else if (i === currIndex || i === lowerIndex) {
                     color = 'red';
                     if (end) {
-                        color = 'green';
+                        color = 'lightgreen';
                     }
                 }
                 else if (end && currIndex === 0 && length > 0 && i === currIndex+1) {
-                    color = 'green';
+                    color = 'lightgreen';
                 }
                 
                 if (items.length <= 10) {

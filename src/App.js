@@ -13,7 +13,7 @@ import MergeSort from './MergeSort';
 function App() {
 
   const [items, setItems] = useState([5,4,2,3,1]);
-  const [speed, setSpeed] = useState(50);
+  const [speed, setSpeed] = useState(75);
   const [sorting, setSorting] = useState(false);
 
   console.log(sorting);
@@ -41,7 +41,7 @@ function App() {
     <div className="App">
       <div className='big'></div>
       <Router>
-        <Navbar items={items} setItems={setItems} speed={speed} setSpeed={setSpeed} setSorting={setSorting} shuffleArray={shuffleArray}/>
+        <Navbar items={items} setItems={setItems} speed={speed} setSpeed={setSpeed} sorting={sorting} setSorting={setSorting} shuffleArray={shuffleArray}/>
           <Routes>
             <Route path="/Learn-Algorithms/bubble-sort" element={<BubbleSort items={items} speed={speed} setItems={setItems} sorting={sorting} setSorting={setSorting}/>} />
           

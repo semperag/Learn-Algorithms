@@ -68,6 +68,8 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
         setMin(items[0]);
         setMinIndex(0);
         setSortClicked(false);
+        setSorted(false);
+        setSorting(false);
     }, [items]);
 
     function sort() {
@@ -92,8 +94,14 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
 
         if (currIndex >= length) {
             setClicked(false);
+            setCurrIndex(0);
+            setIndex(0);
+            setEnd(false);
+            setMin(items[0]);
+            setMinIndex(0);
+            setSortClicked(false);
+            setSorting(false);
             setSorted(true);
-            setItems(Object.assign([], list));
         }
     }
 
@@ -103,25 +111,24 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
             setSortClicked(true);
             console.log("shpuld be sorting!");
             sort();
-            setSorting(false);
         }
     }
 
     return (
         <div className='list'>
             {list.map((item, i) => {
-                let color = 'pink';
+                let color = 'white';
 
                 if (sorted) {
-                    color = 'green';
+                    color = 'lightgreen';
                 }
                 else if (!end && i === minIndex) {
-                    color = 'yellow';
+                    color = 'gold';
                 }
                 else if (i === currIndex || i === index) {
                     color = 'red';
                     if (end && i === currIndex) {
-                        color = 'green';
+                        color = 'lightgreen';
                     }
                 }
                 else if (end && i === minIndex) {

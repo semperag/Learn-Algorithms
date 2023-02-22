@@ -5,11 +5,94 @@
     justify-content: space-around;
 }
 
+#linkSection {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+}
+
 .navbar a {
     color: white;
+    text-decoration: none;
+    padding: 10px;
+    height: 20px;
+    border-radius: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.282);
+}
+
+.disabled:hover {
+    cursor:not-allowed;
+}
+
+#sizeSection {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.signal-icon {
+    height: 20px;
+    width: 30px;
+    padding: 5px;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.signal-icon .signal-bar {
+    width: 4px;
+    background: white;
+}
+.signal-icon:nth-child(1) { width: 18px; }
+
+.signal-icon .signal-bar:nth-child(1) { height: 30%; }
+.signal-icon .signal-bar:nth-child(2) { height: 45%; }
+.signal-icon .signal-bar:nth-child(3) { height: 60%; }
+.signal-icon .signal-bar:nth-child(4) { height: 80%; }
+.signal-icon .signal-bar:nth-child(5) { height: 100%; }
+  
+#sizeInput, #speedInput {
+    cursor: pointer;
+}
+
+#speedSection {
+    display: flex;
+    height: 100%;
+    align-items: center;
 }
 
 .speed {
     width: 200px;
     height: 50px;
+}
+
+.speedIcon {
+    color: white;
+    height: 20px;
+    padding: 3px;
+}
+
+.sort {
+    background-color: darkblue;
+    color: white;
+    font-size: 20px;
+    border: 1px solid white;
+    margin-top: 25px;
+    height: 50px;
+    width: 110px;
+    transition-duration: 0.2s;
+}
+
+.sort:hover {
+    background-color: blue;
+    cursor: pointer;
+    transition-duration: 0.2s;
 }

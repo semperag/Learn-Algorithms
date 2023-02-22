@@ -119,6 +119,7 @@ function heapify(rows, heapLength, i)
         setHeapLength(-1);
         setHeapIndex(-1);
         setSortClicked(false);
+        setSorting(false);
     }, [items]);
 
     if (sortClicked === false) {
@@ -127,16 +128,15 @@ function heapify(rows, heapLength, i)
             setSortClicked(true);
             console.log("shpuld be sorting!");
             sort();
-            setSorting(false);
         }
     }
 
     return (
         <div className='list'>
             {list.map((item, i) => {
-                let color = 'pink';
+                let color = 'white';
                 if (sorted) {
-                    color = 'green';
+                    color = 'lightgreen';
                 }
                 else if (i === index || i === largestNum || i === swap) {
                     color = 'red';

@@ -43,7 +43,15 @@ const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
     }
     else {
         setClicked(false);
-        setItems(Object.assign([], list));
+        setLength(items.length);
+        setClicked(false);
+        setSorted(true);
+        setCurrIndex(0);
+        setUpperIndex(currIndex);
+        setIndex(0);
+        setEnd(false);
+        setSortClicked(false);
+        setSorting(false);
     }
     }, [length]);
 
@@ -80,9 +88,15 @@ const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
 
         if (length <= 1) {
             console.log('here');
+            setLength(items.length);
             setClicked(false);
             setSorted(true);
-            setItems(Object.assign([], list));
+            setCurrIndex(0);
+            setUpperIndex(currIndex);
+            setIndex(0);
+            setEnd(false);
+            setSortClicked(false);
+            setSorting(false);
         }
     }
 
@@ -95,6 +109,8 @@ const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
         setIndex(0);
         setEnd(false);
         setSortClicked(false);
+        setSorting(false);
+        setSorted(false);
     }, [items]);
 
     if (sortClicked === false) {
@@ -103,23 +119,22 @@ const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
             setSortClicked(true);
             console.log("shpuld be sorting!");
             sort();
-            setSorting(false);
         }
     }
 
     return (
         <div className='list'>
             {list.map((item, i) => {
-                let color = 'pink';
+                let color = 'white';
 
                 if (sorted) {
-                    color = 'green';
+                    color = 'lightgreen';
                 }
                 else if (!end && (i === currIndex || i === upperIndex)) {
                     color = 'red';
                 }
                 else if (end && i === currIndex) {
-                    color = 'green'
+                    color = 'lightgreen'
                 }
 
                 if (items.length <= 10) {
