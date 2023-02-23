@@ -43,9 +43,6 @@ const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
     }
     else {
         setClicked(false);
-        setLength(items.length);
-        setClicked(false);
-        setSorted(true);
         setCurrIndex(0);
         setUpperIndex(currIndex);
         setIndex(0);
@@ -138,12 +135,12 @@ const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
                 }
 
                 if (items.length <= 10) {
-                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
+                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
                         {item}
                         </div>)
                 }
                 else {
-                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}></div>)
+                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}></div>)
                 }
             })}
         </div>
