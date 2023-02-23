@@ -61,16 +61,40 @@ function sort()
             setIndex(index-1);
         }
         else {
-            setItems(Object.assign([], rows));
             setSecondHeap(false);
             setSorted(true);
+            setList(Object.assign([], items));
+            setLength(items.length);
+            setClicked(false);
+            setIndex(Math.floor(items.length / 2) - 1);
+            setEnd(false);
+            setFirstHeap(true);
+            setSecondHeap(false);
+            setLargestNum(-1);
+            setSwap(-1);
+            setHeapLength(-1);
+            setHeapIndex(-1);
+            setSortClicked(false);
+            setSorting(false);
         }
         setList(Object.assign([], rows));
     }
     
     if (!secondHeap && !firstHeap) {
-        setItems(Object.assign([], list));
         setSorted(true);
+        setList(Object.assign([], items));
+        setLength(items.length);
+        setClicked(false);
+        setIndex(Math.floor(items.length / 2) - 1);
+        setEnd(false);
+        setFirstHeap(true);
+        setSecondHeap(false);
+        setLargestNum(-1);
+        setSwap(-1);
+        setHeapLength(-1);
+        setHeapIndex(-1);
+        setSortClicked(false);
+        setSorting(false);
     }
 }
 
@@ -143,12 +167,12 @@ function heapify(rows, heapLength, i)
                 }
 
                 if (length <= 10) {
-                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
+                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
                         {item}
                         </div>)
                 }
                 else {
-                    return (<div key={item} className="item" style={{height: `${(item*650)/items.length}px`, backgroundColor: `${color}`}}></div>)
+                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}></div>)
                 }
             })}
         </div>
