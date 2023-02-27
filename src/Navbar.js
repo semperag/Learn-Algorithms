@@ -6,6 +6,7 @@ import { faFastForward } from '@fortawesome/free-solid-svg-icons'
 import { faFastBackward } from '@fortawesome/free-solid-svg-icons'
 
 const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleArray}) => {
+    const ref = React.useRef(null);
 
     const changeList = event => {
         const length = event.target.value;
@@ -14,13 +15,26 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
     }
 
     const changeSpeed = event => {
-        const speed = 1000 - event.target.value;
-        setSpeed(speed);
-        event.target.value = speed;
+        const newSpeed = 1000 - event.target.value;
+        setSpeed(newSpeed);
+        event.target.value = newSpeed;
     }
 
     function sort() {
         setSorting(true);
+    }
+
+    const increaseSpeed = event => {
+        // Minus one because we are setting spped as timeout time (0 = greatest)
+        const newSpeed = 1000 - ref.current.value - 5;
+        setSpeed(0);
+        console.log(newSpeed);
+    }
+
+    const decreaseSpeed = event => {
+        const newSpeed = 1000 - ref.current.value + 5;
+        setSpeed(speed + 5);
+        console.log(newSpeed);
     }
 
     const arrayLength = items.length;
@@ -70,9 +84,9 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
             <Link to="/merge-sort">Merge Sort</Link>
             */}
             <div id="speedSection">
-                <FontAwesomeIcon icon={faFastBackward} className="speedIcon"/>
-                <input id="speedInput" onChange={changeSpeed} type="range" min="0" max="1000" value={1000 - speed}></input>
-                <FontAwesomeIcon icon={faFastForward} className="speedIcon"/>
+                <FontAwesomeIcon icon={faFastBackward} className="speedIcon" onClick={decreaseSpeed}/>
+                <input id="speedInput" ref={ref} onChange={changeSpeed} type="range" min="0" max="1000" value={1000 - speed}></input>
+                <FontAwesomeIcon icon={faFastForward} className="speedIcon" onClick={increaseSpeed}/>
             </div>
             <button className="sort" value={speed} onClick={sort}>Sort</button>
         </div>
