@@ -26,12 +26,20 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
 
     const increaseSpeed = event => {
         // Minus one because we are setting spped as timeout time (0 = greatest)
+        if (speed <= 5) {
+            setSpeed(0);
+            return;
+        }
         const newSpeed = 1000 - ref.current.value - 5;
         setSpeed(0);
         console.log(newSpeed);
     }
 
     const decreaseSpeed = event => {
+        if (speed >= 995) {
+            setSpeed(1000);
+            return;
+        }
         const newSpeed = 1000 - ref.current.value + 5;
         setSpeed(speed + 5);
         console.log(newSpeed);

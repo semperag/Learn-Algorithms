@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
+import './SelectionSort.css'
 
 const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
     const [list, setList] = useState(Object.assign([], items));
