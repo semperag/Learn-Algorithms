@@ -1,3 +1,7 @@
 #linkSection a:nth-child(2) {
     background-color: rgba(251, 251, 251, 0.524);
 }
+
+#linkSection a {
+    background-color: pink;
+}

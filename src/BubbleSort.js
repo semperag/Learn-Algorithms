@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './ListItems.css';
-import './BubbleSort.css'
 
 const BubbleSort = ({items, speed, setItems, sorting, setSorting}) => {
     const [list, setList] = useState(Object.assign([], items));
