@@ -77,15 +77,19 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
     return (
         <div className='navbar'>
             <div id="sizeSection">
-                {sorting === false && <div className="signal-icon" onClick={decreaseList}> }
-                {sorting === true && 
-                    <>
-                        <div className="disabled"> 
-                            <div className="signal-bar"></div>
-                            <div className="signal-bar"></div>
-                            <div className="signal-bar"></div>
-                        </div>
-                    </>
+                {sorting === false && 
+                    <div className="signal-icon" onClick={decreaseList}>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                    </div>
+                }
+                {sorting === true &&
+                    <div className="signal-icon disabled">
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                    </div>
                 }
                 {sorting === false &&
                     <input id="sizeInput" onChange={changeList} value={arrayLength} type="range" step="5" min="5" max="100"></input>
@@ -93,13 +97,24 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
                 {sorting === true && 
                     <input disabled className="disabled" onChange={changeList} value={arrayLength} type="range" step="5" min="5" max="100"></input>
                 }
-                <div className="signal-icon" onClick={increaseList}>
-                    <div className="signal-bar"></div>
-                    <div className="signal-bar"></div>
-                    <div className="signal-bar"></div>
-                    <div className="signal-bar"></div>
-                    <div className="signal-bar"></div>
-                </div>
+                {sorting === false && 
+                    <div className="signal-icon" onClick={increaseList}>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                    </div>
+                }
+                {sorting === true && 
+                    <div className="signal-icon disabled">
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                        <div className="signal-bar"></div>
+                    </div>
+                }
             </div>
             <div id="linkSection">
                 {sorting === false &&
