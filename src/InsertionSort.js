@@ -15,88 +15,76 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
 
     useEffect(() => {
         const handleChange = async () => {
-            setTimeout(() => {
-                if (end || index < 1) {
+            if (end || index < 1) {
+                setTimeout(() => {
                     setIndex(length+1);
                     setLength(length+1);
                     setEnd(false);
-                }
-                else {
-                    setIndex(index-1);
-                }
-            }, speed);
+                }, speed);
+            }
+            else {
+                setIndex(index-1);
+            }
         };
+        // Increment index until we reached the 'end'
         if (clicked && length <= items.length) {
             handleChange();
         }
     }, ([list]));
-    // simulate set interval behavior 
-    // each 5 s this function will be re-invoked
+    
     useEffect(() => {
-        // wait 5 s before cause a re-render
+        // wait specified by the speed value
         if (clicked && length <= items.length) {
             setTimeout(() => {
             }, speed);
         }
         else {
-            setClicked(false);
+            reset();
             setSorted(true);
-            setLength(0);
-            setClicked(false);
-            setCurrIndex(0);
-            setLowerIndex(currIndex-1);
-            setIndex(0);
-            setEnd(false);
-            setSortClicked(false);
-            setSorting(false);
         }
     }, [length]);
 
     useEffect(() => {
-
-        // wait 5 s before cause a re-render
         if (clicked) {
             sort();
         }
-        }, [index]);
+    }, [index]);
 
     function sort() {
         setSorted(false);
         setClicked(true);
-            console.log("rows[index]: " +rows[index]);
-            console.log("index: " +index);
-            setCurrIndex(index);
-            setLowerIndex(index-1);
-            if (index > 0 && rows[index] < rows[index-1]) {
-                const temp = rows[index];
-                rows[index] = rows[index-1];
-                rows[index-1] = temp;
-            }
-            else {
-                setEnd(true);
-            }
-            setTimeout(() => {
-                setList(Object.assign([], rows));
-              }, speed);
+        setCurrIndex(index);
+        setLowerIndex(index-1);
+        if (index > 0 && rows[index] < rows[index-1]) {
+            const temp = rows[index];
+            rows[index] = rows[index-1];
+            rows[index-1] = temp;
+        }
+        else {
+            setEnd(true);
+        }
+
+        setTimeout(() => {
+            setList(Object.assign([], rows));
+        }, speed);
         
-        console.log("length: "+length);
-        console.log("end === " +end)
         if (length >= rows.length) {
-            setClicked(false);
+            reset();
             setSorted(true);
-            setLength(0);
-            setClicked(false);
-            setCurrIndex(0);
-            setLowerIndex(currIndex-1);
-            setIndex(0);
-            setEnd(false);
-            setSortClicked(false);
-            setSorting(false);
         }
     }
 
     useEffect(() => {
+        reset();
         setList(Object.assign([], items));
+    }, [items]);
+
+    if (sortClicked === false && sorting === true) {
+        setSortClicked(true);
+        sort();
+    }
+
+    function reset() {
         setLength(0);
         setClicked(false);
         setCurrIndex(0);
@@ -106,15 +94,6 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
         setSortClicked(false);
         setSorting(false);
         setSorted(false);
-    }, [items]);
-
-    if (sortClicked === false) {
-        console.log("inside sort click");
-        if (sorting === true) {
-            setSortClicked(true);
-            console.log("shpuld be sorting!");
-            sort();
-        }
     }
 
     return (
@@ -134,14 +113,11 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
                     color = 'lightgreen';
                 }
                 
-                if (items.length <= 10) {
-                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
-                        {item}
-                        </div>)
-                }
-                else {
-                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}></div>)
-                }
+                return (items.length <= 10 ?
+                    <div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}>{item}</div>
+                    :
+                    <div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}></div>
+                );
             })}
         </div>
     )
