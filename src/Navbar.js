@@ -77,27 +77,25 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
     return (
         <div className='navbar'>
             <div id="sizeSection">
-                {sorting === false && 
+                {sorting === false ? 
                     <div className="signal-icon" onClick={decreaseList}>
                         <div className="signal-bar"></div>
                         <div className="signal-bar"></div>
                         <div className="signal-bar"></div>
                     </div>
-                }
-                {sorting === true &&
+                    :
                     <div className="signal-icon disabled">
                         <div className="signal-bar"></div>
                         <div className="signal-bar"></div>
                         <div className="signal-bar"></div>
                     </div>
                 }
-                {sorting === false &&
+                {sorting === false ?
                     <input id="sizeInput" onChange={changeList} value={arrayLength} type="range" step="5" min="5" max="100"></input>
-                }
-                {sorting === true && 
+                    :
                     <input disabled className="disabled" onChange={changeList} value={arrayLength} type="range" step="5" min="5" max="100"></input>
                 }
-                {sorting === false && 
+                {sorting === false ?
                     <div className="signal-icon" onClick={increaseList}>
                         <div className="signal-bar"></div>
                         <div className="signal-bar"></div>
@@ -105,8 +103,7 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
                         <div className="signal-bar"></div>
                         <div className="signal-bar"></div>
                     </div>
-                }
-                {sorting === true && 
+                :
                     <div className="signal-icon disabled">
                         <div className="signal-bar"></div>
                         <div className="signal-bar"></div>
@@ -117,22 +114,21 @@ const Navbar = ({items, setItems, speed, setSpeed, sorting, setSorting, shuffleA
                 }
             </div>
             <div id="linkSection">
-                {sorting === false &&
-                    <Link to="/Learn-Algorithms/insertion-sort">Insertion Sort</Link>
+                {sorting === false ?
+                    <>
+                        <Link to="/Learn-Algorithms/insertion-sort">Insertion Sort</Link>
+                        <Link to="/Learn-Algorithms/bubble-sort">Bubble Sort</Link>
+                        <Link to="/Learn-Algorithms/selection-sort">Selection Sort</Link>
+                        <Link to="/Learn-Algorithms/heap-sort">Heap Sort</Link>
+                    </>
+                    :
+                    <>
+                        <Link className="disabled">Insertion Sort</Link>
+                        <Link className="disabled">Bubble Sort</Link>
+                        <Link className="disabled">Selection Sort</Link>
+                        <Link className="disabled">Heap Sort</Link>
+                    </>
                 }
-                {sorting === false &&
-                    <Link to="/Learn-Algorithms/bubble-sort">Bubble Sort</Link>
-                }
-                {sorting === false &&
-                    <Link to="/Learn-Algorithms/selection-sort">Selection Sort</Link>
-                }
-                {sorting === false &&
-                    <Link to="/Learn-Algorithms/heap-sort">Heap Sort</Link>
-                }
-                {sorting === true && <Link className="disabled">Insertion Sort</Link>}
-                {sorting === true && <Link className="disabled">Bubble Sort</Link>}
-                {sorting === true && <Link className="disabled">Selection Sort</Link>}
-                {sorting === true && <Link className="disabled">Heap Sort</Link>}
             </div>
             {/*
             Comming Soon!
