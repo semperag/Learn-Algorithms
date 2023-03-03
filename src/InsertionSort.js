@@ -113,10 +113,12 @@ const InsertionSort = ({items, speed, setItems, sorting, setSorting}) => {
                     color = 'lightgreen';
                 }
                 
+                const itemHeight = (item * 350) / items.length;
+
                 return (items.length <= 10 ?
-                    <div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}>{item}</div>
+                    <div key={item} className="item" style={{height: `${itemHeight}px`, backgroundColor: `${color}`}}>{item}</div>
                     :
-                    <div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}></div>
+                    <div key={item} className="item" style={{height: `${itemHeight}px`, backgroundColor: `${color}`}}></div>
                 );
             })}
         </div>

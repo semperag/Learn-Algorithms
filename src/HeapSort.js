@@ -6,20 +6,15 @@ const HeapSort = ({items, speed, setItems, sorting, setSorting}) => {
     const [length, setLength] = useState(items.length);
     const [clicked, setClicked] = useState(false);
     const [index, setIndex] = useState(Math.floor(items.length / 2) - 1);
-    const [end, setEnd] = useState(false);
     const [firstHeap, setFirstHeap] = useState(true);
     const [secondHeap, setSecondHeap] = useState(false);
     const [largestNum, setLargestNum] = useState(-1);
     const [swap, setSwap] = useState(-1);
-    const [heapLength, setHeapLength] = useState(-1);
-    const [heapIndex, setHeapIndex] = useState(-1);
     const [sorted, setSorted] = useState(false);
     const [sortClicked, setSortClicked] = useState(false);
     let rows = Object.assign([], list);
 
     useEffect(() => {
-
-        // wait 5 s before cause a re-render
         if (clicked) {
             setTimeout(() => {
                 sort();
@@ -37,8 +32,6 @@ function sort()
     // Build heap (rearrange array)
     if (firstHeap) {
         if (index >= 0) {
-            setHeapLength(length);
-            setHeapIndex(index);
             heapify(rows, length, index);
             setIndex(index-1);
         }
@@ -56,46 +49,19 @@ function sort()
             rows[0] = rows[index];
             rows[index] = temp;
             // call max heapify on the reduced heap
-            setHeapLength(index);
-            setHeapIndex(0);
             heapify(rows, index, 0);
             setIndex(index-1);
         }
         else {
-            setSecondHeap(false);
             setSorted(true);
-            setList(Object.assign([], items));
-            setLength(items.length);
-            setClicked(false);
-            setIndex(Math.floor(items.length / 2) - 1);
-            setEnd(false);
-            setFirstHeap(true);
-            setSecondHeap(false);
-            setLargestNum(-1);
-            setSwap(-1);
-            setHeapLength(-1);
-            setHeapIndex(-1);
-            setSortClicked(false);
-            setSorting(false);
+            reset()
         }
         setList(Object.assign([], rows));
     }
     
     if (!secondHeap && !firstHeap) {
         setSorted(true);
-        setList(Object.assign([], items));
-        setLength(items.length);
-        setClicked(false);
-        setIndex(Math.floor(items.length / 2) - 1);
-        setEnd(false);
-        setFirstHeap(true);
-        setSecondHeap(false);
-        setLargestNum(-1);
-        setSwap(-1);
-        setHeapLength(-1);
-        setHeapIndex(-1);
-        setSortClicked(false);
-        setSorting(false);
+        reset()
     }
 }
 
@@ -123,7 +89,6 @@ function heapify(rows, heapLength, i)
         rows[i] = rows[largest];
         rows[largest] = swap;
         setSwap(i);
-        setHeapIndex(largest);
 
         heapify(rows, heapLength, largest);
     }
@@ -132,28 +97,25 @@ function heapify(rows, heapLength, i)
     useEffect(() => {
         if (!clicked)
             setSorted(false);
+        reset()
+    }, [items]);
+
+    if (sortClicked === false && sorting === true) {
+        setSortClicked(true);
+        sort();
+    }
+
+    function reset() {
         setList(Object.assign([], items));
         setLength(items.length);
         setClicked(false);
         setIndex(Math.floor(items.length / 2) - 1);
-        setEnd(false);
         setFirstHeap(true);
         setSecondHeap(false);
         setLargestNum(-1);
         setSwap(-1);
-        setHeapLength(-1);
-        setHeapIndex(-1);
         setSortClicked(false);
         setSorting(false);
-    }, [items]);
-
-    if (sortClicked === false) {
-        console.log("inside sort click");
-        if (sorting === true) {
-            setSortClicked(true);
-            console.log("shpuld be sorting!");
-            sort();
-        }
     }
 
     return (
@@ -167,14 +129,13 @@ function heapify(rows, heapLength, i)
                     color = 'red';
                 }
 
-                if (length <= 10) {
-                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
-                        {item}
-                        </div>)
-                }
-                else {
-                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}></div>)
-                }
+                const itemHeight = (item * 350) / items.length;
+
+                return (length <= 10 ?
+                    <div key={item} className="item" style={{height: `${itemHeight}px`, backgroundColor: `${color}`}}>{item}</div>
+                    :
+                    <div key={item} className="item" style={{height: `${itemHeight}px`, backgroundColor: `${color}`}}></div>
+                )
             })}
         </div>
     )

@@ -17,7 +17,6 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
     useEffect(() => {
         const handleChange = async () => {
             setTimeout(() => {
-                console.log("end === " + end)
                 if (end) {
                     setCurrIndex(currIndex+1);
                     setMinIndex(currIndex+1);
@@ -36,11 +35,7 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
         }
     }, ([list]));
 
-    // simulate set interval behavior 
-    // each 5 s this function will be re-invoked
     useEffect(() => {
-
-    // wait 5 s before cause a re-render
     if (clicked && currIndex < length) {
         setTimeout(() => {
         }, speed);
@@ -52,15 +47,48 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
     }, [length]);
 
     useEffect(() => {
-        // wait 5 s before cause a re-render
+        // wait specified speed time before a re-render
         if (clicked) {
             sort();
         }
-        }, [index]);
+    }, [index]);
 
     useEffect(() => {
         setList(Object.assign([], items));
         setLength(items.length);
+        reset();
+        setSorted(false);
+    }, [items]);
+
+    function sort() {
+        setClicked(true);
+        setSorted(false);
+
+        if (index < length && rows[index] < min) {
+            setMin(rows[index]);
+            setMinIndex(index);
+        }
+        else if (index > length) {
+            setEnd(true);
+            rows[minIndex] = rows[currIndex];
+            rows[currIndex] = min;
+        }
+
+        setTimeout(() => {
+            setList(Object.assign([], rows));
+        }, );
+
+        if (currIndex >= length) {
+            reset();
+        }
+    }
+
+    if (sortClicked === false && sorting === true) {
+        setSortClicked(true);
+        sort();
+    }
+
+    function reset() {
         setClicked(false);
         setCurrIndex(0);
         setIndex(0);
@@ -68,50 +96,8 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
         setMin(items[0]);
         setMinIndex(0);
         setSortClicked(false);
-        setSorted(false);
         setSorting(false);
-    }, [items]);
-
-    function sort() {
-        setClicked(true);
-        setSorted(false);
-            console.log("rows[index]: " +rows[index]);
-            console.log("index: " +index);
-
-            if (index < length && rows[index] < min) {
-                setMin(rows[index]);
-                setMinIndex(index);
-            }
-            else if (index > length) {
-                setEnd(true);
-                rows[minIndex] = rows[currIndex];
-                rows[currIndex] = min;
-            }
-
-            setTimeout(() => {
-                setList(Object.assign([], rows));
-              }, );
-
-        if (currIndex >= length) {
-            setClicked(false);
-            setCurrIndex(0);
-            setIndex(0);
-            setEnd(false);
-            setMin(items[0]);
-            setMinIndex(0);
-            setSortClicked(false);
-            setSorting(false);
-            setSorted(true);
-        }
-    }
-
-    if (sortClicked === false) {
-        console.log("inside sort click");
-        if (sorting === true) {
-            setSortClicked(true);
-            console.log("shpuld be sorting!");
-            sort();
-        }
+        setSorted(true);
     }
 
     return (
@@ -135,14 +121,13 @@ const SelectionSort = ({items, speed, setItems, sorting, setSorting}) => {
                     color = 'red';
                 }
 
-                if (length <= 10) {
-                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`, fontSize: `2em`, fontWeight: `bold`, textAlign: `center`}}>
-                        {item}
-                        </div>)
-                }
-                else {
-                    return (<div key={item} className="item" style={{height: `${(item*450)/items.length}px`, backgroundColor: `${color}`}}></div>)
-                }
+                const itemHeight = (item * 350) / items.length;
+
+                return (length <= 10 ?
+                    <div key={item} className="item" style={{height: `${itemHeight}px`, backgroundColor: `${color}`}}>{item}</div>
+                    :
+                    <div key={item} className="item" style={{height: `${itemHeight}px`, backgroundColor: `${color}`}}></div>
+                )
             })}
         </div>
     )
